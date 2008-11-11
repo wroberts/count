@@ -1,6 +1,6 @@
 TARGET   = count
 OBJS     = count.o
-FLAGS    = -g -O0 -Wall
+FLAGS    = -O2 -Wall
 INCLUDES =
 LIBS     =
 
