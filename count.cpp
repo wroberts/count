@@ -42,17 +42,18 @@ main ( int    argc,
         LineDict[sLine] += 1;
         nNumLines       += 1;
     }
-    int nWidth = 0;
-    while ( nNumLines > 0 )
-    {
-        nWidth++;
-        nNumLines /= 10;
-    }
+    //int nWidth = 0;
+    //while ( nNumLines > 0 )
+    //{
+    //    nWidth++;
+    //    nNumLines /= 10;
+    //}
     for ( map<string,int>::iterator iterator = LineDict.begin();
           iterator != LineDict.end(); iterator++ )
     {
-        cout << setw(nWidth) << iterator->second
-               << "  " << iterator->first << endl;
+        //cout << setw(nWidth) << iterator->second
+        //         << "  " << iterator->first << endl;
+        cout << iterator->second << "\t" << iterator->first << endl;
     }
     return 0;
 }
