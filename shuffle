@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import random
+import sys
+
+input_stream = sys.stdin
+if sys.argv[1:]:
+    input_stream = open(sys.argv[1])
+
+lines = input_stream.readlines()
+random.shuffle(lines)
+for line in lines:
+    print line,
