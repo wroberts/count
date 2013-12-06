@@ -1,4 +1,6 @@
 *.o
 *~
 .DS_Store
-count
+/a-cnt.txt
+/b-cnt.txt
+/count
