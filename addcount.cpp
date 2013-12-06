@@ -181,7 +181,7 @@ int main ( int argc, char **argv )
         inputFile1->open(sFile1Name.c_str());
         if (!*inputFile1)
         {
-            cerr << "Could not open file " << sFile1Name << endl;
+            cerr << "ERROR: Could not open file " << sFile1Name << endl;
             exit(1);
         }
     }
@@ -205,7 +205,7 @@ int main ( int argc, char **argv )
         inputFile2->open(sFile2Name.c_str());
         if (!*inputFile2)
         {
-            cerr << "Could not open file " << sFile2Name <<endl;
+            cerr << "ERROR: Could not open file " << sFile2Name <<endl;
             cleanup(inputFile1, inputFile2, outputFile);
             exit(1);
         }
@@ -223,7 +223,7 @@ int main ( int argc, char **argv )
         outputFile = new ofstream(sOutputFileName.c_str());
         if (!*outputFile)
         {
-            cerr << "Could not open file " << sOutputFileName <<endl;
+            cerr << "ERROR: Could not open file " << sOutputFileName <<endl;
             cleanup(inputFile1, inputFile2, outputFile);
             exit(1);
         }
