@@ -91,8 +91,6 @@ main ( int    argc,
     for ( map<string,int>::iterator iterator = LineDict.begin();
           iterator != LineDict.end(); iterator++ )
     {
-        //cout << setw(nWidth) << iterator->second
-        //         << "  " << iterator->first << endl;
         cout << iterator->second << "\t" << iterator->first << endl;
     }
     return 0;
