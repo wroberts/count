@@ -23,6 +23,7 @@
  * \file count.cpp
  */
 
+#include <unistd.h>
 #include <string>
 #include <iostream>
 #include <iomanip>
@@ -33,13 +34,33 @@ int
 main ( int    argc,
        char **argv )
 {
+    bool       fIncludeLastLine = false;
+    int        c;
+    while ((c = getopt(argc, argv, "e?")) != -1)
+    {
+        switch(c)
+        {
+        case 'e':
+            fIncludeLastLine = true;
+            break;
+        case '?':
+            exit(1);
+            break;
+        default:
+            break;
+        }
+    }
+
     int             nNumLines = 0;
     map<string,int> LineDict;
     while ( cin.good() )
     {
         string sLine;
         getline ( cin, sLine );
-        LineDict[sLine] += 1;
+        if (fIncludeLastLine || !cin.eof() || sLine.length() != 0)
+        {
+            LineDict[sLine] += 1;
+        }
         nNumLines       += 1;
     }
     //int nWidth = 0;
