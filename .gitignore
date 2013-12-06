@@ -1,3 +1,4 @@
-count
 *.o
 *~
+.DS_Store
+count
