@@ -286,7 +286,7 @@ int main ( int argc, char **argv )
     }
 #endif // DEBUG
 
-    while (fReadLine1 && fReadLine1)
+    while (fReadLine1 && fReadLine2)
     {
         int nCompare = sValue1.compare(sValue2);
         if (nCompare < 0)
