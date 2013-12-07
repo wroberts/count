@@ -25,6 +25,8 @@
  * \file addcount.cpp
  */
 
+//#define DEBUG
+
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -136,7 +138,9 @@ ReadCountLine ( const string &sFileName,
 
 int main ( int argc, char **argv )
 {
-    //cout << "Hello, world!" << endl;
+#ifdef DEBUG
+    cout << "Hello, world!" << endl;
+#endif // DEBUG
 
     int        c;
     while ((c = getopt(argc, argv, "?")) != -1)
@@ -170,13 +174,17 @@ int main ( int argc, char **argv )
     sFile1Name = argv[optind];
     if (sFile1Name.compare("-") == 0)
     {
-        //cout << "file1 stdin" << endl;
+#ifdef DEBUG
+        cout << "file1 stdin" << endl;
+#endif // DEBUG
         inputFile1 = 0;
         sFile1Name = "<stdin>";
     }
     else
     {
-        //cout << "file1 " << sFile1Name << endl;
+#ifdef DEBUG
+        cout << "file1 " << sFile1Name << endl;
+#endif // DEBUG
         inputFile1 = new ifstream();
         inputFile1->open(sFile1Name.c_str());
         if (!*inputFile1)
@@ -194,13 +202,17 @@ int main ( int argc, char **argv )
             cerr << "ERROR: only one input file can be standard input" << endl;
             exit(1);
         }
-        //cout << "file2 stdin" << endl;
+#ifdef DEBUG
+        cout << "file2 stdin" << endl;
+#endif // DEBUG
         inputFile2 = 0;
         sFile2Name = "<stdin>";
     }
     else
     {
-        //cout << "file2 " << sFile2Name << endl;
+#ifdef DEBUG
+        cout << "file2 " << sFile2Name << endl;
+#endif // DEBUG
         inputFile2 = new ifstream();
         inputFile2->open(sFile2Name.c_str());
         if (!*inputFile2)
@@ -212,14 +224,18 @@ int main ( int argc, char **argv )
     }
     if ((argc - optind) == 2)
     {
-        //cout << "output to stdout" << endl;
+#ifdef DEBUG
+        cout << "output to stdout" << endl;
+#endif // DEBUG
         outputFile      = 0;
         sOutputFileName = "<stdout>";
     }
     else
     {
         sOutputFileName = argv[optind + 2];
-        //cout << "output to " << sOutputFileName << endl;
+#ifdef DEBUG
+        cout << "output to " << sOutputFileName << endl;
+#endif // DEBUG
         outputFile = new ofstream(sOutputFileName.c_str());
         if (!*outputFile)
         {
@@ -262,11 +278,13 @@ int main ( int argc, char **argv )
         exit(1);
     }
 
-    //if (fReadLine1)
-    //{
-    //    cout << "nCount1 \"" << nCount1 << "\"" << endl;
-    //    cout << "sValue1 \"" << sValue1 << "\"" << endl;
-    //}
+#ifdef DEBUG
+    if (fReadLine1)
+    {
+        cout << "nCount1 \"" << nCount1 << "\"" << endl;
+        cout << "sValue1 \"" << sValue1 << "\"" << endl;
+    }
+#endif // DEBUG
 
     while (fReadLine1 && fReadLine1)
     {
