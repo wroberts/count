@@ -24,6 +24,8 @@
  * \file sortalph.cpp
  */
 
+//#define DEBUG
+
 #include <unistd.h>
 #include <fstream>
 #include <sstream>
@@ -169,7 +171,7 @@ int main ( int argc, char **argv )
     }
     else
     {
-        sInputFileName = argv[optind];
+        sInputFileName = argv[optind++];
     }
 
     if (sInputFileName.compare("-") == 0)
@@ -194,7 +196,7 @@ int main ( int argc, char **argv )
         }
     }
 
-    if ((argc - optind) == 1)
+    if ((argc - optind) == 0)
     {
 #ifdef DEBUG
         cout << "output to stdout" << endl;
@@ -204,7 +206,7 @@ int main ( int argc, char **argv )
     }
     else
     {
-        sOutputFileName = argv[optind + 1];
+        sOutputFileName = argv[optind];
 #ifdef DEBUG
         cout << "output to " << sOutputFileName << endl;
 #endif // DEBUG
