@@ -53,6 +53,7 @@ printHelp()
     cout << "Options:" << endl;
     cout << endl;
     cout << "   -f      sort output in order of descending frequency" << endl;
+    cout << "   -d      interpret counts as floating-point numbers" << endl;
     cout << "   -?      display this help message" << endl;
 }
 
@@ -77,9 +78,11 @@ cleanup ( ifstream *inputFile,
 bool
 ReadCountLine ( const string &sFileName,
                 ifstream     *inputFile,
+                bool          fFloatingPoint,
                 bool         &fDidRead,
                 int          &nLinesRead,
                 int          &nCount,
+                double       &nFloatCount,
                 string       &sValue )
 {
     fDidRead     = false;
@@ -108,7 +111,14 @@ ReadCountLine ( const string &sFileName,
         }
         sValue = sLine.substr(nFirstTab + 1);
         istringstream iss(sLine.substr(0, nFirstTab));
-        iss >> nCount;
+        if (fFloatingPoint)
+        {
+            iss >> nFloatCount;
+        }
+        else
+        {
+            iss >> nCount;
+        }
         if (iss.fail())
         {
             cerr << sFileName << ":" << nLinesRead
@@ -141,12 +151,16 @@ int main ( int argc, char **argv )
     cout << "Hello, world!" << endl;
 #endif // DEBUG
 
+    bool       fFloatingPoint      = false;
     bool       fSortDecreasingFreq = false;
     int        c;
-    while ((c = getopt(argc, argv, "f?")) != -1)
+    while ((c = getopt(argc, argv, "df?")) != -1)
     {
         switch(c)
         {
+        case 'd':
+            fFloatingPoint = true;
+            break;
         case 'f':
             fSortDecreasingFreq = true;
             break;
@@ -219,17 +233,21 @@ int main ( int argc, char **argv )
         }
     }
 
-    int             nLineNum = 0;
-    map<string,int> LineDict;
-    bool            fReadLine;
-    int             nCount;
-    string          sValue;
+    int                nLineNum = 0;
+    map<string,int>    LineDict;
+    map<string,double> LineDictFloat;
+    bool               fReadLine;
+    int                nCount;
+    double             nFloatCount;
+    string             sValue;
 
     if (ReadCountLine ( sInputFileName,
                         inputFile,
+                        fFloatingPoint,
                         fReadLine,
                         nLineNum,
                         nCount,
+                        nFloatCount,
                         sValue ))
     {
         cleanup(inputFile, outputFile);
@@ -246,13 +264,18 @@ int main ( int argc, char **argv )
 
     while (fReadLine)
     {
-        LineDict[sValue] += nCount;
+        if (fFloatingPoint)
+            LineDictFloat[sValue] += nFloatCount;
+        else
+            LineDict[sValue] += nCount;
         // process 1
         if (ReadCountLine ( sInputFileName,
                             inputFile,
+                            fFloatingPoint,
                             fReadLine,
                             nLineNum,
                             nCount,
+                            nFloatCount,
                             sValue ))
         {
             cleanup(inputFile, outputFile);
@@ -262,26 +285,56 @@ int main ( int argc, char **argv )
 
     if (fSortDecreasingFreq)
     {
-        map<int,string> FlippedLineDict = flip_map(LineDict);
-        for ( map<int,string>::reverse_iterator iterator =
-                  FlippedLineDict.rbegin();
-              iterator != FlippedLineDict.rend(); iterator++ )
+        if (fFloatingPoint)
         {
-            if (outputFile)
-                *outputFile << iterator->first << "\t" << iterator->second << endl;
-            else
-                cout << iterator->first << "\t" << iterator->second << endl;
+            map<double,string> FlippedLineDictFloat = flip_map(LineDictFloat);
+            for ( map<double,string>::reverse_iterator iterator =
+                      FlippedLineDictFloat.rbegin();
+                  iterator != FlippedLineDictFloat.rend(); iterator++ )
+            {
+                if (outputFile)
+                    *outputFile << iterator->first << "\t" << iterator->second << endl;
+                else
+                    cout << iterator->first << "\t" << iterator->second << endl;
+            }
+        }
+        else
+        {
+            map<int,string> FlippedLineDict = flip_map(LineDict);
+            for ( map<int,string>::reverse_iterator iterator =
+                      FlippedLineDict.rbegin();
+                  iterator != FlippedLineDict.rend(); iterator++ )
+            {
+                if (outputFile)
+                    *outputFile << iterator->first << "\t" << iterator->second << endl;
+                else
+                    cout << iterator->first << "\t" << iterator->second << endl;
+            }
         }
     }
     else
     {
-        for ( map<string,int>::iterator iterator = LineDict.begin();
-              iterator != LineDict.end(); iterator++ )
+        if (fFloatingPoint)
         {
-            if (outputFile)
-                *outputFile << iterator->second << "\t" << iterator->first << endl;
-            else
-                cout << iterator->second << "\t" << iterator->first << endl;
+            for ( map<string,double>::iterator iterator = LineDictFloat.begin();
+                  iterator != LineDictFloat.end(); iterator++ )
+            {
+                if (outputFile)
+                    *outputFile << iterator->second << "\t" << iterator->first << endl;
+                else
+                    cout << iterator->second << "\t" << iterator->first << endl;
+            }
+        }
+        else
+        {
+            for ( map<string,int>::iterator iterator = LineDict.begin();
+                  iterator != LineDict.end(); iterator++ )
+            {
+                if (outputFile)
+                    *outputFile << iterator->second << "\t" << iterator->first << endl;
+                else
+                    cout << iterator->second << "\t" << iterator->first << endl;
+            }
         }
     }
 

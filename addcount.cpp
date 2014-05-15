@@ -53,6 +53,7 @@ printHelp()
     cout << endl;
     cout << "Options:" << endl;
     cout << endl;
+    cout << "   -d      interpret counts as floating-point numbers" << endl;
     cout << "   -?      display this help message" << endl;
 }
 
@@ -84,9 +85,11 @@ cleanup ( ifstream *inputFile1,
 bool
 ReadCountLine ( const string &sFileName,
                 ifstream     *inputFile,
+                bool          fFloatingPoint,
                 bool         &fDidRead,
                 int          &nLinesRead,
                 int          &nCount,
+                double       &nFloatCount,
                 string       &sValue,
                 string       &sLastValue )
 {
@@ -116,7 +119,14 @@ ReadCountLine ( const string &sFileName,
         }
         sValue = sLine.substr(nFirstTab + 1);
         istringstream iss(sLine.substr(0, nFirstTab));
-        iss >> nCount;
+        if (fFloatingPoint)
+        {
+            iss >> nFloatCount;
+        }
+        else
+        {
+            iss >> nCount;
+        }
         if (iss.fail())
         {
             cerr << sFileName << ":" << nLinesRead
@@ -142,11 +152,15 @@ int main ( int argc, char **argv )
     cout << "Hello, world!" << endl;
 #endif // DEBUG
 
+    bool       fFloatingPoint      = false;
     int        c;
-    while ((c = getopt(argc, argv, "?")) != -1)
+    while ((c = getopt(argc, argv, "d?")) != -1)
     {
         switch(c)
         {
+        case 'd':
+            fFloatingPoint = true;
+            break;
         case '?':
             printHelp();
             exit(1);
@@ -249,17 +263,21 @@ int main ( int argc, char **argv )
     int    nLineNum2 = 0;
     bool   fReadLine1;
     int    nCount1;
+    double nFloatCount1;
     string sValue1;
     string sLastValue1;
     bool   fReadLine2;
     int    nCount2;
+    double nFloatCount2;
     string sValue2;
     string sLastValue2;
     if (ReadCountLine ( sFile1Name,
                         inputFile1,
+                        fFloatingPoint,
                         fReadLine1,
                         nLineNum1,
                         nCount1,
+                        nFloatCount1,
                         sValue1,
                         sLastValue1 ))
     {
@@ -268,9 +286,11 @@ int main ( int argc, char **argv )
     }
     if (ReadCountLine ( sFile2Name,
                         inputFile2,
+                        fFloatingPoint,
                         fReadLine2,
                         nLineNum2,
                         nCount2,
+                        nFloatCount2,
                         sValue2,
                         sLastValue2 ))
     {
@@ -291,16 +311,28 @@ int main ( int argc, char **argv )
         int nCompare = sValue1.compare(sValue2);
         if (nCompare < 0)
         {
-            if (outputFile)
-                *outputFile << nCount1 << "\t" << sValue1 << endl;
+            if (fFloatingPoint)
+            {
+                if (outputFile)
+                    *outputFile << nFloatCount1 << "\t" << sValue1 << endl;
+                else
+                    cout << nFloatCount1 << "\t" << sValue1 << endl;
+            }
             else
-                cout << nCount1 << "\t" << sValue1 << endl;
+            {
+                if (outputFile)
+                    *outputFile << nCount1 << "\t" << sValue1 << endl;
+                else
+                    cout << nCount1 << "\t" << sValue1 << endl;
+            }
             // process 1
             if (ReadCountLine ( sFile1Name,
                                 inputFile1,
+                                fFloatingPoint,
                                 fReadLine1,
                                 nLineNum1,
                                 nCount1,
+                                nFloatCount1,
                                 sValue1,
                                 sLastValue1 ))
             {
@@ -310,16 +342,28 @@ int main ( int argc, char **argv )
         }
         else if (nCompare == 0)
         {
-            if (outputFile)
-                *outputFile << nCount1 + nCount2 << "\t" << sValue1 << endl;
+            if (fFloatingPoint)
+            {
+                if (outputFile)
+                    *outputFile << nFloatCount1 + nFloatCount2 << "\t" << sValue1 << endl;
+                else
+                    cout << nFloatCount1 + nFloatCount2 << "\t" << sValue1 << endl;
+            }
             else
-                cout << nCount1 + nCount2 << "\t" << sValue1 << endl;
+            {
+                if (outputFile)
+                    *outputFile << nCount1 + nCount2 << "\t" << sValue1 << endl;
+                else
+                    cout << nCount1 + nCount2 << "\t" << sValue1 << endl;
+            }
             // process 1
             if (ReadCountLine ( sFile1Name,
                                 inputFile1,
+                                fFloatingPoint,
                                 fReadLine1,
                                 nLineNum1,
                                 nCount1,
+                                nFloatCount1,
                                 sValue1,
                                 sLastValue1 ))
             {
@@ -329,9 +373,11 @@ int main ( int argc, char **argv )
             // process 2
             if (ReadCountLine ( sFile2Name,
                                 inputFile2,
+                                fFloatingPoint,
                                 fReadLine2,
                                 nLineNum2,
                                 nCount2,
+                                nFloatCount2,
                                 sValue2,
                                 sLastValue2 ))
             {
@@ -341,16 +387,28 @@ int main ( int argc, char **argv )
         }
         else
         {
-            if (outputFile)
-                *outputFile << nCount2 << "\t" << sValue2 << endl;
+            if (fFloatingPoint)
+            {
+                if (outputFile)
+                    *outputFile << nFloatCount2 << "\t" << sValue2 << endl;
+                else
+                    cout << nFloatCount2 << "\t" << sValue2 << endl;
+            }
             else
-                cout << nCount2 << "\t" << sValue2 << endl;
+            {
+                if (outputFile)
+                    *outputFile << nCount2 << "\t" << sValue2 << endl;
+                else
+                    cout << nCount2 << "\t" << sValue2 << endl;
+            }
             // process 2
             if (ReadCountLine ( sFile2Name,
                                 inputFile2,
+                                fFloatingPoint,
                                 fReadLine2,
                                 nLineNum2,
                                 nCount2,
+                                nFloatCount2,
                                 sValue2,
                                 sLastValue2 ))
             {
@@ -361,16 +419,28 @@ int main ( int argc, char **argv )
     }
     while (fReadLine1)
     {
-        if (outputFile)
-            *outputFile << nCount1 << "\t" << sValue1 << endl;
+        if (fFloatingPoint)
+        {
+            if (outputFile)
+                *outputFile << nFloatCount1 << "\t" << sValue1 << endl;
+            else
+                cout << nFloatCount1 << "\t" << sValue1 << endl;
+        }
         else
-            cout << nCount1 << "\t" << sValue1 << endl;
+        {
+            if (outputFile)
+                *outputFile << nCount1 << "\t" << sValue1 << endl;
+            else
+                cout << nCount1 << "\t" << sValue1 << endl;
+        }
         // process 1
         if (ReadCountLine ( sFile1Name,
                             inputFile1,
+                            fFloatingPoint,
                             fReadLine1,
                             nLineNum1,
                             nCount1,
+                            nFloatCount1,
                             sValue1,
                             sLastValue1 ))
         {
@@ -380,16 +450,28 @@ int main ( int argc, char **argv )
     }
     while (fReadLine2)
     {
-        if (outputFile)
-            *outputFile << nCount2 << "\t" << sValue2 << endl;
+        if (fFloatingPoint)
+        {
+            if (outputFile)
+                *outputFile << nFloatCount2 << "\t" << sValue2 << endl;
+            else
+                cout << nFloatCount2 << "\t" << sValue2 << endl;
+        }
         else
-            cout << nCount2 << "\t" << sValue2 << endl;
+        {
+            if (outputFile)
+                *outputFile << nCount2 << "\t" << sValue2 << endl;
+            else
+                cout << nCount2 << "\t" << sValue2 << endl;
+        }
         // process 2
         if (ReadCountLine ( sFile2Name,
                             inputFile2,
+                            fFloatingPoint,
                             fReadLine2,
                             nLineNum2,
                             nCount2,
+                            nFloatCount2,
                             sValue2,
                             sLastValue2 ))
         {
@@ -402,4 +484,3 @@ int main ( int argc, char **argv )
 
     return 0;
 }
-
