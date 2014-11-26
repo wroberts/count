@@ -105,11 +105,13 @@ ReadCountLine ( const string &sFileName,
         size_t nFirstTab = sLine.find_first_of('\t');
         if (nFirstTab == string::npos)
         {
-            cerr << sFileName << ":" << nLinesRead
-                 << ": error: no tab character found on line" << endl;
-            return true;
+            sValue    = "";
+            nFirstTab = sLine.length();
         }
-        sValue = sLine.substr(nFirstTab + 1);
+        else
+        {
+            sValue = sLine.substr(nFirstTab + 1);
+        }
         istringstream iss(sLine.substr(0, nFirstTab));
         if (fFloatingPoint)
         {
