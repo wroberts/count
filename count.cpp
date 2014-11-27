@@ -46,7 +46,7 @@ printHelp()
     cout << endl;
     cout << "   -e      always count the last line of the input, even if it is" << endl;
     cout << "           empty" << endl;
-    cout << "           -f      sort output in order of descending frequency" << endl;
+    cout << "   -f      sort output in order of descending frequency" << endl;
     cout << "   -?      display this help message and exit" << endl;
 }
 
