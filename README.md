@@ -1,6 +1,6 @@
 count - UNIX line counting utilities
 
-Copyright (c) 2014 Will Roberts <wildwilhelm@gmail.com>
+Copyright (c) 2014 Will Roberts \<wildwilhelm@gmail.com\>
 
 Homepage: https://github.com/wroberts/count
 
