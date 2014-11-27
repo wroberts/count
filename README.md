@@ -1,4 +1,4 @@
-count - UNIX count utilities
+count - UNIX line counting utilities
 
 Copyright (c) 2014 Will Roberts
 
