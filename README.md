@@ -2,7 +2,7 @@ count - UNIX line counting utilities
 
 Copyright (c) 2014 Will Roberts
 
-This projected is licensed under the terms of the MIT license.
+This project is licensed under the terms of the MIT license.
 
 `count` works similarly to `sort fruit | uniq -c`.  The output is
 tab-separated and in alphabetical order.
