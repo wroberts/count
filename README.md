@@ -17,3 +17,10 @@ together (even if they're not in alphabetical order):
     `cat COUNT1 COUNT2 | sortalph`
 
 `sortnum` is a script that calls `sort -nr`.
+
+`threshcount` reads a count file as produced by `count` and outputs
+only those lines whose counts are greater than the given threshold
+argument.
+
+`shuffle` is a short Python script which reads in a file and outputs
+its lines in random order.
