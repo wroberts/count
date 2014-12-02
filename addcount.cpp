@@ -214,6 +214,7 @@ int main ( int argc, char **argv )
         if (!inputFile1)
         {
             cerr << "ERROR: only one input file can be standard input" << endl;
+            cleanup(inputFile1, inputFile2, outputFile);
             exit(1);
         }
 #ifdef DEBUG
