@@ -31,8 +31,6 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <unistd.h>
-#include <vector>
 using namespace std;
 
 void
