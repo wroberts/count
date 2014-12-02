@@ -1,4 +1,5 @@
 count - UNIX line counting utilities
+====================================
 
 Copyright (c) 2014 Will Roberts \<wildwilhelm@gmail.com\>
 
@@ -26,3 +27,23 @@ argument.
 
 `shuffle` is a short Python script which reads in a file and outputs
 its lines in random order.
+
+Profiling
+---------
+
+`count` is faster than `sort | uniq -c`, but can use much more memory:
+
+    $ cat BIGFILE | wc
+     1653677 21751482 75598346
+
+    $ time (cat BIGFILE | sort | uniq -c > /dev/null)
+
+    real   0m50.933s
+    user   0m55.267s
+    sys    0m0.347s
+
+    $ time (cat BIGFILE | ~/dev/count/count > /dev/null)
+
+    real   0m9.233s
+    user   0m9.357s
+    sys    0m0.453s
