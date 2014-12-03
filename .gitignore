@@ -1,10 +1,10 @@
 *.o
 *~
 .DS_Store
-/a-cnt.txt
 /addcount
-/b-cnt.txt
-/c-cnt.txt
 /count
 /sortalph
+/testing/a-cnt.txt
+/testing/b-cnt.txt
+/testing/c-cnt.txt
 /threshcount
