@@ -52,8 +52,8 @@ From github:
     ../configure
     make install
 
-Profiling
----------
+Speed Test
+----------
 
 `count` is faster than `sort | uniq -c`, but can use much more memory:
 
