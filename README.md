@@ -64,7 +64,7 @@ Profiling
     user   0m55.267s
     sys    0m0.347s
 
-    $ time (cat BIGFILE | ~/dev/count/count > /dev/null)
+    $ time (cat BIGFILE | count > /dev/null)
 
     real   0m9.233s
     user   0m9.357s
