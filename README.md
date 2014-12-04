@@ -72,10 +72,10 @@ Speed Test
     user   0m9.357s
     sys    0m0.453s
 
-Awk Eqiuivalents
-----------------
+Awk Equivalents
+---------------
 
-The `count` tools can be replicated with trivial `awk` scripts.
+Most of the `count` tools can be replicated with trivial `awk` scripts.
 Usually, the compiled binaries are faster.
 
 `count` is equivalent to, though faster than:
