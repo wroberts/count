@@ -1,6 +1,9 @@
 How to set up with autoconf
 ===========================
 
+A lot of this is taken from
+https://www.lrde.epita.fr/~adl/dl/autotools.pdf .
+
 Set up autotools from git (always in the / directory):
 
     autoreconf --install
