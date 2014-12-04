@@ -31,7 +31,7 @@ argument.
 
 `shuffle` is a short Python script which reads in a file and outputs
 its lines in random order.  `shuf` in the
-[https://www.gnu.org/software/coreutils/](GNU Coreutils) is faster and
+[GNU Coreutils](https://www.gnu.org/software/coreutils/) is faster and
 more flexible.
 
 Install
