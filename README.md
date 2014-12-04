@@ -82,7 +82,7 @@ Usually, the compiled binaries are faster.
 
     awk '{c[$0]++} END {OFS="\t"; for (x in c) print c[x], x}' | sort -k2
 
-`cat COUNT1 COUNT2 | sortalph` is equivalent to, though faster than:
+`sortalph` is equivalent to, though faster than:
 
     awk 'BEGIN{FS=OFS="\t"} {v=$1; $1=""; c[substr($0,2)]+=v} END {for (x in c) print c[x], x}' | sort -k2
 
