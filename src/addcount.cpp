@@ -27,6 +27,7 @@
 
 //#define DEBUG
 
+#include "config.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -36,6 +37,7 @@ using namespace std;
 void
 printHelp()
 {
+    cout << "addcount - " << PACKAGE_STRING << endl << endl;
     cout << "addcount sums the counts stored in two count files together," << endl;
     cout << "outputting the results to standard output (or to the file OUTPUT, if" << endl;
     cout << "this is specified).  The two input count files INPUT1 and INPUT2" << endl;

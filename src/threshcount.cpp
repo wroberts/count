@@ -27,6 +27,7 @@
 
 //#define DEBUG
 
+#include "config.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -38,6 +39,7 @@ using namespace std;
 void
 printHelp()
 {
+    cout << "threshcount - " << PACKAGE_STRING << endl << endl;
     cout << "threshcount reads a count file on standard input, discarding those" << endl;
     cout << "lines whose counts are less than or equal to the threshold argument" << endl;
     cout << "passed on the command line.  It outputs the result to standard output." << endl;

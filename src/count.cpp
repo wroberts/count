@@ -23,6 +23,7 @@
  * \file count.cpp
  */
 
+#include "config.h"
 #include <unistd.h>
 #include <string>
 #include <iostream>
@@ -33,6 +34,7 @@ using namespace std;
 void
 printHelp()
 {
+    cout << "count - " << PACKAGE_STRING << endl << endl;
     cout << "Counts unique lines on standard input, outputting the counts after all" << endl;
     cout << "input is read.  Output is sorted in alphabetical order of lines.  The" << endl;
     cout << "output of the program can be sort it in order of descending frequency" << endl;

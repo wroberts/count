@@ -26,6 +26,7 @@
 
 //#define DEBUG
 
+#include "config.h"
 #include <unistd.h>
 #include <fstream>
 #include <sstream>
@@ -38,6 +39,7 @@ using namespace std;
 void
 printHelp()
 {
+    cout << "sortalph - " << PACKAGE_STRING << endl << endl;
     cout << "sortalph reads in a count file, sorts it alphabetically, and sums" << endl;
     cout << "duplicate entries if they are present, outputting the results to" << endl;
     cout << "standard output (or to the file OUTPUT, if this is specified).  The" << endl;
