@@ -6,6 +6,7 @@
 /addcount
 /autom4te.cache/
 /build-aux/
+/build/
 /config.h.in
 /configure
 /count
