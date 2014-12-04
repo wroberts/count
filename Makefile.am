@@ -1,1 +1,2 @@
+EXTRA_DIST = LICENSE.md README.md
 SUBDIRS = src
