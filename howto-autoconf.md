@@ -28,6 +28,6 @@ Install locally:
 
     mkdir build
     cd build
-    ../configure --prefix=$HOME/local
+    ../configure --prefix=$HOME/.local
     make install
     make distclean
