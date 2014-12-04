@@ -88,4 +88,4 @@ Usually, the compiled binaries are faster.
 
 `threshcount 2` is equivalent to, but slower than:
 
-    `awk '{if (2 < $1) print $0}'`
+    awk '{if (2 < $1) print $0}'
