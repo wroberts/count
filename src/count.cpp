@@ -24,10 +24,7 @@
  */
 
 #include "config.h"
-#include <unistd.h>
-#include <string>
 #include <iostream>
-#include <iomanip>
 #include <map>
 using namespace std;
 

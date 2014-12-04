@@ -27,12 +27,9 @@
 //#define DEBUG
 
 #include "config.h"
-#include <unistd.h>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include <iostream>
-#include <iomanip>
 #include <map>
 using namespace std;
 
