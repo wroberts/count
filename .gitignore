@@ -3,16 +3,12 @@
 .DS_Store
 /Makefile.in
 /aclocal.m4
-/addcount
 /autom4te.cache/
 /build-aux/
 /build/
 /config.h.in
 /configure
-/count
-/sortalph
 /src/Makefile.in
 /testing/a-cnt.txt
 /testing/b-cnt.txt
 /testing/c-cnt.txt
-/threshcount
