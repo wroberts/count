@@ -71,3 +71,21 @@ Speed Test
     real   0m9.233s
     user   0m9.357s
     sys    0m0.453s
+
+Awk Eqiuivalents
+----------------
+
+The `count` tools can be replicated with trivial `awk` scripts.
+Usually, the compiled binaries are faster.
+
+`count` is equivalent to, though faster than:
+
+    awk '{c[$0]++} END {OFS="\t"; for (x in c) print c[x], x}' | sort -k2
+
+`cat COUNT1 COUNT2 | sortalph` is equivalent to, though faster than:
+
+    awk 'BEGIN{FS=OFS="\t"} {v=$1; $1=""; c[substr($0,2)]+=v} END {for (x in c) print c[x], x}' | sort -k2
+
+`threshcount 2` is equivalent to, but slower than:
+
+    `awk '{if (2 < $1) print $0}'`
