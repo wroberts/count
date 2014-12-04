@@ -5,7 +5,11 @@ Copyright (c) 2014 Will Roberts \<wildwilhelm@gmail.com\>
 
 Homepage: https://github.com/wroberts/count
 
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the MIT license (see
+LICENSE.md).
+
+Overview
+--------
 
 `count` works similarly to `sort fruit | uniq -c`.  The output is
 tab-separated and in alphabetical order.
@@ -27,6 +31,24 @@ argument.
 
 `shuffle` is a short Python script which reads in a file and outputs
 its lines in random order.
+
+Install
+-------
+
+From tarball:
+
+    tar xf count-1.0.tar.gz
+    cd count-1.0/
+    ./configure
+    make install
+
+From github:
+
+    autoreconf --install
+    mkdir build
+    cd build
+    ../configure
+    make install
 
 Profiling
 ---------
