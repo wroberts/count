@@ -30,7 +30,9 @@ only those lines whose counts are greater than the given threshold
 argument.
 
 `shuffle` is a short Python script which reads in a file and outputs
-its lines in random order.
+its lines in random order.  `shuf` in the
+[https://www.gnu.org/software/coreutils/](GNU Coreutils) is faster and
+more flexible.
 
 Install
 -------
