@@ -28,6 +28,7 @@
 //#define DEBUG
 
 #include "config.h"
+#include <getopt.h>
 #include <iostream>
 #include <sstream>
 using namespace std;

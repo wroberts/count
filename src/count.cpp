@@ -24,6 +24,8 @@
  */
 
 #include "config.h"
+#include <getopt.h>
+#include <algorithm>
 #include <iostream>
 #include <map>
 using namespace std;
